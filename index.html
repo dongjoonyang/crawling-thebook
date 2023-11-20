@@ -78,8 +78,8 @@
             while(true){
                 try {
                     // 데이터 추출
-                    const title = htmlDOM.querySelector('.book-overview h2').textContent;
-                    const content = htmlDOM.querySelector('.book-overview').textContent;
+                    const title = htmlDOM.querySelector('.book-overview h2').textContent.replace(/^\s+|\s+$/gm, "");
+                    const content = htmlDOM.querySelector('.book-overview').textContent.replace(/^\s+|\s+$/gm, "");
                     // const pay = htmlDOM.querySelector('.book-overview h4').textContent;
                     theBook.push({
                         title,
@@ -98,6 +98,7 @@
         crawl(theBookUrl, depth).then(() => {
             console.log('크롤링 완료');
             console.log(JSON.stringify(theBook, null, 2));
+            console.log(theBook.length)
         }).catch(err => console.error(err));
 
     </script>
