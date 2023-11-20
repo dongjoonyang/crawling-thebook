@@ -8,7 +8,7 @@
 <body>
     <div>
         <div class="free">
-            <h1>무료</h1>
+            <h1>무료11</h1>
             <div id="free"></div>
         </div>
 
@@ -75,18 +75,23 @@
                 }
             }
 
-            try {
-                // 데이터 추출
-                const title = htmlDOM.querySelector('.book-overview h2').textContent;
-                const content = htmlDOM.querySelector('.book-overview').textContent;
-                // const pay = htmlDOM.querySelector('.book-overview h4').textContent;
-                theBook.push({
-                    title,
-                    content
-                });
-            } catch (e) {
-                return;
+            while(true){
+                try {
+                    // 데이터 추출
+                    const title = htmlDOM.querySelector('.book-overview h2').textContent;
+                    const content = htmlDOM.querySelector('.book-overview').textContent;
+                    // const pay = htmlDOM.querySelector('.book-overview h4').textContent;
+                    theBook.push({
+                        title,
+                        content
+                    });
+
+                    break;
+                } catch (e) {
+                    return;
+                }
             }
+            
         }
 
         // 실행
