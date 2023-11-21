@@ -6,7 +6,7 @@
  */
 (function () {
     // cors 우회 프록시 서버
-    //const proxyUrl = 'https://proxy.cors.sh/https://acme.com/';
+    const proxyUrl = 'https://proxy.cors.sh/';
     // 수집 대상 url
     const theBookUrl = 'https://thebook.io/';
     // 딜레이
@@ -22,13 +22,18 @@
     async function crawl(theBookUrl){
         // 수집중인 URL
         console.log(`수집중 ${theBookUrl} ...`);
+
+        const count = document.querySelector('#count');
+        count.textContent = parseInt(count.textContent) + 1;
+
+        const layer = document.querySelector('#layer');
+        layer.classList.add('on');
+
         // URL에서 데이터를 가져옴
-        const response = await fetch(`https://proxy.cors.sh/${theBookUrl}`, {
-            // headers: {
-            //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-            //     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
-            // }
+        const response = await fetch(`${proxyUrl}${theBookUrl}`, {
             headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+                'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
                 'x-cors-api-key': 'temp_252c1da3eb210a5fe04d177380d818ad'
             }
         });
@@ -46,7 +51,6 @@
 
         const links = htmlDOM.querySelectorAll('.mdl-card__title a');
 
-        try {
             for (const link of links) {
                 // href 속성이 없으면 건너뜀
                 if (!link.hasAttribute('href')) {
@@ -65,7 +69,7 @@
                     }
                 }
             }
-
+        try {
             // 데이터 추출 151
             const title = htmlDOM.querySelector('.book-overview h2').textContent.replace(/^\s+|\s+$/gm, "");
             const h4 = htmlDOM.querySelector('.book-overview > div.h4') !== null ? '유료' : '무료';
@@ -77,7 +81,6 @@
                 src
             });
         } catch (error) {
-            
             return;
         }
     }
@@ -87,6 +90,22 @@
         console.log('크롤링 완료');
         console.log(JSON.stringify(theBook, null, 2));
         console.log(theBook.length);
+
+        // 책 수집 건 수
+        const numCount = parseInt(count.textContent);
+        const closeBtn = document.querySelector('#close');
+        const layer = document.querySelector('#layer');
+        if(theBook.length === numCount){
+            closeBtn.classList.add('on');
+        }
+
+        if(closeBtn.classList.contains('on')){
+            closeBtn.addEventListener('click', (e) => {
+                layer.classList.remove('on');
+            })
+        }
+        
+
         const free = document.querySelector('#book');
         
         try {
@@ -112,13 +131,17 @@
                 
                 img.src = theBook[i].src;
                 a.href = theBookUrl + src[1];
+                a.setAttribute('target', '_blank');
                 book.appendChild(li).appendChild(a).appendChild(img);
                 book.appendChild(li).appendChild(titleNode);
                 book.appendChild(li).appendChild(span);
             }    
+
         } catch (error) {
             return;
         }
+        
+        
     }).catch(err => console.error(err));
 })();
 

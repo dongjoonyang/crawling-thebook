@@ -26,15 +26,34 @@ b{ font-weight:normal; color:inherit; }
 ::placeholder{ color:#c5c5c5; }
 input.miss{ background-color:#ffe0e0; }
 form{height: 100%;}
-/* start */
-#book{display:flex;flex-wrap: wrap;padding:15px;}
-#book li.pay{display:block;}
-#book li.pay.on{display:block;}
-#book li {display:flex;flex-direction: column; font-size:16px;font-weight: bold;flex: 0 0 23%;padding:20px;margin:1%;box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);}
-#book li span{display:block;}
-#book li span.free{color:red;}
-#book li span.pay{color:#ddd;}
-img{width:212px;height:272px;}
+/* 
+*start 
+*/
+.wrap{width: 100%;height: 100%;position:relative}
+/* book */
+.book_list{display:flex;flex-wrap: wrap;padding:15px;}
+.book_list li.pay{display:flex;flex-direction: column;}
+.book_list li.pay.on{display:block;}
+.book_list li.pay a{text-align: center;margin-bottom:10px;}
+.book_list li {display:flex;flex-direction: column; font-size:16px;font-weight: bold;flex: 0 0 23%;padding:20px;margin:1%;box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);}
+.book_list li span{display:block;margin-top:7px;font-size:16px;}
+.book_list li span.free{color:red;}
+.book_list li span.pay{color:#ddd;}
+.book_list img{width:212px;height:272px;}
 
-#toggleBtn{border:none;background-color:#d0d3f2;border-radius: 3px;min-width: 100px;height:45px;margin:35px;}
-#toggleBtn:hover{background-color: #fff;border:1px solid #d0d3f2;color:#333;}
+/* dimm */
+.load{position: absolute;width:300px;height:300px;background-color: #fff; top:50%;left:50%;transform: translate(-50%, -50%);z-index: 10;border-radius: 10px;}
+.load p{text-align: center;}
+.load_img{display: block;text-align: center;margin-top:15px;}
+.load_img img{transform:scale(0.6);}
+.load_title{font-size:18px;font-weight: bold;}
+.load_count{font-size: 24px;color:brown}
+.dimm{position:fixed;top:0;right:0;bottom:0;left:0;background-color: #000;opacity: .8;}
+.close{display:none;border:none;background-color: #fff;font-size: 24px;position: absolute;top:10px;right:10px;}
+.close.on{display: block;}
+.layer.on{display: block;}
+.layer{display:none;}
+
+/* button */
+.toggle_btn{border:none;background-color:#d0d3f2;border-radius: 3px;min-width: 100px;height:45px;margin:35px;}
+.toggle_btn:hover{background-color: #fff;border:1px solid #d0d3f2;color:#333;}

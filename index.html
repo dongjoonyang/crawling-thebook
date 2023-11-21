@@ -7,10 +7,18 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
 </head>
 <body>
-    <div>
-        <button id="toggleBtn" type="button">전체 보기</button>
+    <div class="wrap">
+        <button id="toggleBtn" class="toggle_btn" type="button">전체 보기</button>
         <div class="thebook">
-            <ul id="book"></ul>
+            <ul id="book" class="book_list"></ul>
+        </div>
+        <div id="layer" class="layer">
+            <div id="load" class="load">
+                <button id="close" class="close">X</button>
+                <span class="load_img"><img src="./load.gif"></span>
+                <p><span class="load_title">책 수집중 : </span><span id="count" class="load_count">-1</span><span class="load_title">건</span></p>
+            </div>
+            <div class="dimm"></div>
         </div>
     </div>
 	<script src="./common.js" type="text/javascript"></script>
