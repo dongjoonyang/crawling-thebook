@@ -74,6 +74,24 @@
                 src
             });
         } catch (error) {
+            for (const link of links) {
+                // href 속성이 없으면 건너뜀
+                if (!link.hasAttribute('href')) {
+                    continue;
+                }
+                // href 속성값 추출
+                const href = link.getAttribute('href');
+                // 동일 도메인에 있는 URL만 수집
+                if (href.startsWith('https://thebook.io/')) {
+                    // 링크 추출 후 딜레이 시간만큼 대기한 후 재귀적으로 호출
+                    await new Promise(resolve => setTimeout(resolve, delayTime));
+                    const nextUrl = new URL(href, theBookUrl).href;
+                    // 링크 깊이가 0 이상인 경우에만 수집
+                    if (depth > 0) {
+                        await crawl(nextUrl, depth - 1);
+                    }
+                }
+            }
             return;
         }
     }
@@ -107,7 +125,7 @@
                 `${theBook[i].h4}` === '무료' ? span.className = 'free' : span.className = 'pay';
                 
                 img.src = theBook[i].src;
-                a.href = `${theBookUrl}${src[1]}`
+                a.href = theBookUrl + src[1];
                 book.appendChild(li).appendChild(a).appendChild(img);
                 book.appendChild(li).appendChild(titleNode);
                 book.appendChild(li).appendChild(span);
