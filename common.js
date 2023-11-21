@@ -6,7 +6,7 @@
  */
 (function () {
     // cors 우회 프록시 서버
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    //const proxyUrl = 'https://proxy.cors.sh/https://acme.com/';
     // 수집 대상 url
     const theBookUrl = 'https://thebook.io/';
     // 딜레이
@@ -23,10 +23,13 @@
         // 수집중인 URL
         console.log(`수집중 ${theBookUrl} ...`);
         // URL에서 데이터를 가져옴
-        const response = await fetch(proxyUrl + theBookUrl, {
+        const response = await fetch(`https://proxy.cors.sh/${theBookUrl}`, {
+            // headers: {
+            //     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+            //     'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
+            // }
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-                'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7'
+                'x-cors-api-key': 'temp_252c1da3eb210a5fe04d177380d818ad'
             }
         });
         // 응답 정보를 문자열로 변환
@@ -74,24 +77,7 @@
                 src
             });
         } catch (error) {
-            for (const link of links) {
-                // href 속성이 없으면 건너뜀
-                if (!link.hasAttribute('href')) {
-                    continue;
-                }
-                // href 속성값 추출
-                const href = link.getAttribute('href');
-                // 동일 도메인에 있는 URL만 수집
-                if (href.startsWith('https://thebook.io/')) {
-                    // 링크 추출 후 딜레이 시간만큼 대기한 후 재귀적으로 호출
-                    await new Promise(resolve => setTimeout(resolve, delayTime));
-                    const nextUrl = new URL(href, theBookUrl).href;
-                    // 링크 깊이가 0 이상인 경우에만 수집
-                    if (depth > 0) {
-                        await crawl(nextUrl, depth - 1);
-                    }
-                }
-            }
+            
             return;
         }
     }
@@ -145,14 +131,20 @@
     const toggleBtn = document.querySelector('#toggleBtn');
     let flag = true;
     toggleBtn.addEventListener('click', (event) => {
-        const payView = document.querySelector('.pay');
+        const payView = document.querySelectorAll('.pay');
+        console.log(payView.length)
         if(flag){
+            console.log(`${payView.length}:sssss`);
             toggleBtn.textContent = '무료만 보기';
-            payView.classList.add('on');
+            // for(let i = 0; i <= payView.length;i++){
+            //     payView.classList.add('on');
+            // }
             flag = false;
         }else{
             toggleBtn.textContent = '전체 보기';
-            payView.classList.remove('on');
+            // for(let i = 0; i <= payView.length;i++){
+            //     payView.classList.remove('on');
+            // }
             flag = true;
         }
     })

@@ -28,7 +28,7 @@ input.miss{ background-color:#ffe0e0; }
 form{height: 100%;}
 /* start */
 #book{display:flex;flex-wrap: wrap;padding:15px;}
-#book li.pay{display:none;}
+#book li.pay{display:block;}
 #book li.pay.on{display:block;}
 #book li {display:flex;flex-direction: column; font-size:16px;font-weight: bold;flex: 0 0 23%;padding:20px;margin:1%;box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);}
 #book li span{display:block;}
