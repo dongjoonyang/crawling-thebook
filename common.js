@@ -10,7 +10,7 @@
     // 수집 대상 url
     const theBookUrl = 'https://thebook.io/';
     // 딜레이
-    const delayTime = 0.0000000001;
+    const delayTime = 0;
     // 수집한 데이터 저장
     const theBook = [];
     // 링크 깊이
@@ -63,7 +63,7 @@
                 // 동일 도메인에 있는 URL만 수집
                 if (href.startsWith('https://thebook.io/')) {
                     // 링크 추출 후 딜레이 시간만큼 대기한 후 재귀적으로 호출
-                    await new Promise(resolve => setTimeout(resolve, delayTime));
+                    await new Promise(resolve);
                     const nextUrl = new URL(href, theBookUrl).href;
                     // 링크 깊이가 0 이상인 경우에만 수집
                     if (depth > 0) {
