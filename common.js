@@ -34,6 +34,7 @@
             headers: {
                 'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
                 'Access-Control-Allow-Origin': 'https://dongjoonyang.github.io/crawling-thebook/',
+                'Access-Control-Allow-Credentials': 'true',
                 'x-cors-api-key': 'temp_252c1da3eb210a5fe04d177380d818ad'
             }
         });
