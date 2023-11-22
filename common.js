@@ -32,8 +32,7 @@
         // URL에서 데이터를 가져옴
         const response = await fetch(`${proxyUrl}${theBookUrl}`, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-                'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+                'Access-Control-Allow-Origin': '*',
                 'x-cors-api-key': 'temp_252c1da3eb210a5fe04d177380d818ad'
             }
         });
@@ -91,29 +90,29 @@
         console.log(JSON.stringify(theBook, null, 2));
         console.log(theBook.length);
 
-        // 책 수집 건 수
+        // 책 수집 완료 후
         const numCount = parseInt(count.textContent);
         const closeBtn = document.querySelector('#close');
         const layer = document.querySelector('#layer');
         const toggleBtn = document.querySelector('#toggleBtn');
+        const loadImg = document.querySelector('#loadImg');
+        const loadTitle = document.querySelector('#loadTitle');
 
         if(theBook.length === numCount){
             closeBtn.classList.add('on');
         }
 
         if(closeBtn.classList.contains('on')){
+            loadImg.src = './doodle.png';
+            loadTitle.textContent = '책';
+
             closeBtn.addEventListener('click', (e) => {
                 layer.classList.remove('on');
-                toggleBtn.classList.add('on');
-            })
+                toggleBtn.classList.add('on'); // 버튼
+            });
         }
-        
-        // 버튼
-        
-        
 
         const free = document.querySelector('#book');
-        
         try {
             for(let i = 0; i <= theBook.length; i++){
                 const li = document.createElement("li");
@@ -132,7 +131,7 @@
                 const src = arSplitFileName[0].split('_');
                 
                 span.appendChild(h4Node);
-                `${theBook[i].h4}` === '무료' ? li.className = 'free' : li.className = 'pay';
+                `${theBook[i].h4}` === '무료' ? li.className = 'free_item' : li.className = 'pay_item';
                 `${theBook[i].h4}` === '무료' ? span.className = 'free' : span.className = 'pay';
                 
                 img.src = theBook[i].src;
@@ -160,20 +159,18 @@
     const toggleBtn = document.querySelector('#toggleBtn');
     let flag = true;
     toggleBtn.addEventListener('click', (event) => {
-        const payView = document.querySelectorAll('.pay');
-        console.log(payView.length)
+        const payViews = document.querySelectorAll('.pay_item');
         if(flag){
-            console.log(`${payView.length}:sssss`);
-            toggleBtn.textContent = '무료만 보기';
-            // for(let i = 0; i <= payView.length;i++){
-            //     payView.classList.add('on');
-            // }
+            toggleBtn.textContent = '전체 보기';
+            [].forEach.call(payViews, function(payView){ 
+                payView.style.display = 'none';
+            });
             flag = false;
         }else{
-            toggleBtn.textContent = '전체 보기';
-            // for(let i = 0; i <= payView.length;i++){
-            //     payView.classList.remove('on');
-            // }
+            toggleBtn.textContent = '무료 보기';
+            [].forEach.call(payViews, function(payView){ 
+                payView.style.display = '';
+            });
             flag = true;
         }
     })
