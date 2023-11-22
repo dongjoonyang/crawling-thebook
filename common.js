@@ -95,6 +95,8 @@
         const numCount = parseInt(count.textContent);
         const closeBtn = document.querySelector('#close');
         const layer = document.querySelector('#layer');
+        const toggleBtn = document.querySelector('#toggleBtn');
+
         if(theBook.length === numCount){
             closeBtn.classList.add('on');
         }
@@ -102,8 +104,12 @@
         if(closeBtn.classList.contains('on')){
             closeBtn.addEventListener('click', (e) => {
                 layer.classList.remove('on');
+                toggleBtn.classList.add('on');
             })
         }
+        
+        // 버튼
+        
         
 
         const free = document.querySelector('#book');
