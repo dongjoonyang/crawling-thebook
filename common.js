@@ -31,12 +31,14 @@
 
         // URL에서 데이터를 가져옴
         const response = await fetch(`${proxyUrl}${theBookUrl}`, {
+            mode: 'cors',
+            credentials: 'include',
             headers: {
                 'x-cors-api-key': 'temp_39e6d7a0e7b837ce66fe99b6307aa059',
                 'Access-Control-Allow-Origin': 'https://dongjoonyang.github.io',
                 'Access-Control-Allow-Credentials': 'true',
-                'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
-                'Content-Type' : 'application/javascript; charset=utf-8',
+                'Access-Control-Allow-Methods': 'GET, DELETE, HEAD, OPTIONS',
+                'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
             }
         });
         // 응답 정보를 문자열로 변환
@@ -63,7 +65,7 @@
                 // 동일 도메인에 있는 URL만 수집
                 if (href.startsWith('https://thebook.io/')) {
                     // 링크 추출 후 딜레이 시간만큼 대기한 후 재귀적으로 호출
-                    //await new Promise(resolve => setTimeout(resolve));
+                    await new Promise(resolve => setTimeout(resolve));
                     const nextUrl = new URL(href, theBookUrl).href;
                     // 링크 깊이가 0 이상인 경우에만 수집
                     if (depth > 0) {
