@@ -32,7 +32,8 @@
         // URL에서 데이터를 가져옴
         const response = await fetch(`${proxyUrl}${theBookUrl}`, {
             headers: {
-                'Access-Control-Allow-Origin': '*',
+                'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+                'Access-Control-Allow-Origin': 'https://dongjoonyang.github.io/crawling-thebook/',
                 'x-cors-api-key': 'temp_252c1da3eb210a5fe04d177380d818ad'
             }
         });
