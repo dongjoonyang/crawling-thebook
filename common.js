@@ -33,7 +33,8 @@
         const response = await fetch(`${proxyUrl}${theBookUrl}`, {
             headers: {
                 'x-cors-api-key': 'temp_39e6d7a0e7b837ce66fe99b6307aa059',
-                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Origin': 'https://dongjoonyang.github.io',
+                'Access-Control-Allow-Credentials': 'true',
                 'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
                 'Content-Type' : 'application/javascript; charset=utf-8',
             }
