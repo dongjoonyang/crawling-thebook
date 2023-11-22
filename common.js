@@ -32,7 +32,7 @@
         // URL에서 데이터를 가져옴
         const response = await fetch(`${proxyUrl}${theBookUrl}`, {
             headers: {
-                'x-cors-api-key': 'temp_252c1da3eb210a5fe04d177380d818ad',
+                'x-cors-api-key': 'temp_39e6d7a0e7b837ce66fe99b6307aa059',
                 'Access-Control-Allow-Origin': '*',
                 'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
                 'Content-Type' : 'application/javascript; charset=utf-8',
